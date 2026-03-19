@@ -1,7 +1,11 @@
 import * as THREE from 'three';
-import { scene, buildingWidth, building } from './setup.js';
+import { scene, buildingWidth, buildingHeight, building } from './setup.js';
 
 const windowSpaceValue = 1.3;
+const windowRadius = 0.7;
+const windowInnerRadius = windowRadius / 6;
+
+const getRandomValue = (max) => Math.random() * max;
 
 export const doProceduralGeneration = () => {
 	// Clear any existing children of the building object first
@@ -107,9 +111,6 @@ const generateNegXWindows = () => {
 };
 
 const createWindow = () => {
-	// Constants
-	const windowRadius = 0.7;
-
 	// Geometry - TorusGeometry to create a window with thickness instead of RingGeometry which I also tried
 	const windowGeometry = new THREE.TorusGeometry(
 		windowRadius,
