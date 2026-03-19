@@ -4,6 +4,7 @@ import {
 	concreteTexture,
 	gravelConcreteTexture,
 } from './textures.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 // Exports
 export let scene;
@@ -44,12 +45,46 @@ export function setScene() {
 	renderer.setSize(renderView.clientWidth, renderView.clientHeight);
 	renderer.domElement.style.borderRadius = '15px';
 	document.querySelector('.render-view').appendChild(renderer.domElement);
+
+	// Create and configure controls and render resizing
+	const controls = new OrbitControls(camera, renderer.domElement);
+
+	function updateLoop() {
+		controls.update();
+		renderer.render(scene, camera);
+	}
+
+	renderer.setAnimationLoop(updateLoop);
+
+	//Resize window functionality
+	function resizeRenderView() {
+		const width = document.querySelector('.render-view').clientWidth;
+		const height = document.querySelector('.render-view').clientHeight;
+		renderer.setSize(width, height);
+		camera.aspect = width / height;
+		camera.updateProjectionMatrix();
+		renderer.render(scene, camera);
+	}
+
+	window.addEventListener('resize', resizeRenderView);
 }
 
 const setSceneElements = () => {
+	createLights();
 	createFloor();
 	createBuildingBase();
 	createBuilding();
+};
+
+const createLights = () => {
+	// Ambient light for general illumination
+	const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+	scene.add(ambientLight);
+
+	// Directional light for depth and shadows
+	const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+	directionalLight.position.set(20, 30, 20);
+	scene.add(directionalLight);
 };
 
 const createFloor = () => {
@@ -100,9 +135,8 @@ const createBuilding = () => {
 		buildingHeight,
 		buildingWidth,
 	);
-	let buildingMaterial = new THREE.MeshBasicMaterial({
-		color: new THREE.Color(0, 1, 0),
-		wireframe: true,
+	let buildingMaterial = new THREE.MeshPhongMaterial({
+		color: new THREE.Color(0.5, 0.5, 0.5),
 	});
 
 	const building = new THREE.Mesh(buildingGeometry, buildingMaterial);
