@@ -1,17 +1,8 @@
 import * as THREE from '/build/three.module.js';
-import {
-	setScene,
-	setSceneElements,
-	scene,
-	camera,
-	renderer,
-	cube,
-	CLOCK,
-} from './setup.js';
+import { setupScene, scene, camera, renderer, cube, CLOCK } from './setup.js';
 import { OrbitControls } from './build/controls/OrbitControls.js';
 
-setScene();
-setSceneElements();
+setupScene();
 
 const controls = new OrbitControls(camera, renderer.domElement);
 
