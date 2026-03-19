@@ -79,6 +79,7 @@ const setSceneElements = () => {
 	createFloor();
 	createBuildingBase();
 	createBuilding();
+	createDoor();
 };
 
 const createLights = () => {
@@ -141,4 +142,27 @@ const createBuilding = () => {
 	building.position.y = floorYValue + buildingHeight / 2 + 2;
 
 	scene.add(building);
+};
+
+const createDoor = () => {
+	//Constants
+	const doorHeight = 1.4;
+
+	// Geometry
+	let doorGeometry = new THREE.BoxGeometry(0.9, doorHeight, 0.5);
+
+	// Material
+	let doorMaterial = new THREE.MeshPhongMaterial({
+		color: new THREE.Color(0, 1, 0),
+		// wireframe: true,
+	});
+
+	// Object
+	const door = new THREE.Mesh(doorGeometry, doorMaterial);
+
+	door.position.z += buildingWidth / 2;
+	door.position.y = floorYValue + baseHeight + 0.7;
+
+	// Add to building
+	scene.add(door);
 };
