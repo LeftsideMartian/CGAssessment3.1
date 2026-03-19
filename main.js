@@ -3,5 +3,4 @@ import { setupScene } from './setup.js';
 import { doProceduralGeneration } from './generation.js';
 
 setupScene();
-doProceduralGeneration();
-setTimeout(doProceduralGeneration, 3000); // For testing
+doProceduralGeneration(0.8, 0.3);
