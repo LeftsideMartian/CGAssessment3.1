@@ -13,7 +13,10 @@ export let renderer;
 export const CLOCK = new THREE.Clock();
 
 export const floorYValue = -5;
+const baseHeight = 2;
+const baseWidth = 15;
 export const buildingWidth = 5;
+export const buildingHeight = 15;
 
 export let building;
 
@@ -111,10 +114,6 @@ const createFloor = () => {
 };
 
 const createBuildingBase = () => {
-	//Constants
-	const baseHeight = 2;
-	const baseWidth = 15;
-
 	const baseGeometry = new THREE.BoxGeometry(baseWidth, baseHeight, baseWidth);
 	const baseMaterial = new THREE.MeshBasicMaterial({
 		map: gravelConcreteTexture,
@@ -128,9 +127,6 @@ const createBuildingBase = () => {
 };
 
 const createBuilding = () => {
-	//Constants
-	const buildingHeight = 15;
-
 	let buildingGeometry = new THREE.BoxGeometry(
 		buildingWidth,
 		buildingHeight,
