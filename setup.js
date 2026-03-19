@@ -12,8 +12,10 @@ export let camera;
 export let renderer;
 export const CLOCK = new THREE.Clock();
 
-//Constants/values
-const floorYValue = -5;
+export const floorYValue = -5;
+export const buildingWidth = 5;
+
+export let building;
 
 // Main setup function
 export const setupScene = () => {
@@ -128,7 +130,6 @@ const createBuildingBase = () => {
 const createBuilding = () => {
 	//Constants
 	const buildingHeight = 15;
-	const buildingWidth = 5;
 
 	let buildingGeometry = new THREE.BoxGeometry(
 		buildingWidth,
@@ -139,7 +140,7 @@ const createBuilding = () => {
 		color: new THREE.Color(0.5, 0.5, 0.5),
 	});
 
-	const building = new THREE.Mesh(buildingGeometry, buildingMaterial);
+	building = new THREE.Mesh(buildingGeometry, buildingMaterial);
 
 	building.position.y = floorYValue + buildingHeight / 2 + 2;
 
