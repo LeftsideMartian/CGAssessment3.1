@@ -57,6 +57,7 @@ export function setScene() {
 	function updateLoop() {
 		controls.update();
 		renderer.render(scene, camera);
+		repositionGUI();
 	}
 
 	renderer.setAnimationLoop(updateLoop);
@@ -69,6 +70,15 @@ export function setScene() {
 		camera.aspect = width / height;
 		camera.updateProjectionMatrix();
 		renderer.render(scene, camera);
+	}
+
+	function repositionGUI() {
+		const guiDom = document.getElementsByClassName('lil-gui')[0];
+		const renderView = document.getElementsByClassName('render-view')[0];
+		const rect = renderView.getBoundingClientRect();
+
+		guiDom.style.right = rect.left;
+		guiDom.style.top = rect.top;
 	}
 
 	window.addEventListener('resize', resizeRenderView);

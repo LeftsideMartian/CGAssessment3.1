@@ -12,7 +12,8 @@ export const doProceduralGeneration = (windowVariance, barDisplacement) => {
 	building.clear();
 
 	// Then generate windows on each face
-	generateWindows(windowVariance, barDisplacement);
+	// Do 1 - value simply for UI purposes. Makes more sense for high values of window variance to result in more windows
+	generateWindows(1 - windowVariance, barDisplacement);
 };
 
 const generateWindows = (windowVariance, barDisplacement) => {
